@@ -15,8 +15,10 @@ Site profissional publicado em **https://psicologoleonardosc.com** pelo GitHub P
 
 No GitHub, abra o `index.html`, clique no **lápis (Edit)**, altere o texto e clique em **Commit changes**. O site atualiza em cerca de 1 minuto.
 
-- **WhatsApp e mensagem automática:** procure por `wa.me` no `index.html` (aparece 6 vezes).
-- **Textos:** estão todos no `index.html`, na ordem em que aparecem na página.
+- **Páginas:** `index.html` (início), `tcc-online/index.html`, `burnout-trabalho/index.html` e `como-funciona/index.html`. Os textos de cada página estão no arquivo dela, na ordem em que aparecem.
+- **Cores e fontes:** ficam em `estilo.css`, usado por todas as páginas.
+- **WhatsApp:** procure por `wa.me`. Cada página tem uma mensagem automática própria ("Vi a página sobre burnout…", "Li a página Como funciona…"), para você saber de onde veio cada contato. A da página inicial é "Vim pelo seu site…".
+- **Search Console:** o `sitemap.xml` já lista as 4 páginas. Se escolher a verificação por meta tag, cole a tag no `index.html`, na linha indicada logo abaixo do `canonical`.
 - **Fotos:** envie um arquivo novo com o mesmo nome (`leonardo-retrato-880.jpg`, `leonardo-sobre.jpg` etc.) em **Add file → Upload files**.
 
 ## Cuidados éticos (CFP) já aplicados
