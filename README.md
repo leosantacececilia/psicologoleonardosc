@@ -26,5 +26,5 @@ No GitHub, abra o `index.html`, clique no **lápis (Edit)**, altere o texto e cl
 - Nome profissional e CRP visíveis no topo, junto à foto e no rodapé
 - Sem preço usado como propaganda (os valores são passados pelo WhatsApp)
 - Sem depoimentos de pacientes e sem promessa de resultado
-- Aviso de que o site não é serviço de emergência, com CVV (188) e SAMU (192)
+- Aviso de que o site não é serviço de emergência (sem números de crise; urgência e emergência são combinadas no primeiro contato, conforme a Res. CFP 09/2024)
 - Sem nome, avaliações ou selos da Zenklub (se a Zenklub confirmar por escrito que pode, dá para incluir)
