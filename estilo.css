@@ -7,14 +7,14 @@
   --surface-2: #FBEDCF;
   --ink: #0E3244;             /* Azul Marinho */
   --ink-2: #3E5664;
-  --ink-3: #667983;
+  --ink-3: #566A77;          /* contraste 5.3:1 sobre o off white (AA para texto pequeno) */
   --line: #EBDBBC;
   --orange: #E6864E;          /* Laranja Pastel */
   --yellow: #E6B54E;          /* Amarelo Pastel */
   --accent: #E6864E;
   --accent-hover: #EE9A68;
   --on-accent: #0E3244;
-  --em: #C45F2A;              /* laranja com contraste para títulos no claro */
+  --em: #B25320;              /* laranja com contraste 4.8:1 no claro (anos da formação e numeração) */
   --label: #A9501F;           /* laranja com contraste para textos pequenos */
   --band: #0E3244;
   --band-ink: #FFF8E9;
@@ -210,6 +210,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 860px) {
   .about .wrap { grid-template-columns: 1fr; }
   .about-photo { position: static; max-width: 340px; }
+  .about { overflow-x: clip; } /* a moldura amarela (::before) avançava 18px além da borda em telas de 360px, criando rolagem lateral */
 }
 
 /* ---------- Abordagem ---------- */
