@@ -27,22 +27,65 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Leonardo Santa Cecília · Psicólogo",
-  "description": "Psicoterapia online em Terapia Cognitivo-Comportamental (TCC). CRP 05/67861.",
-  "url": "https://psicologoleonardosc.com/",
-  "image": "https://psicologoleonardosc.com/leonardo-retrato-880.jpg",
-  "telephone": "+55 21 99111-7223",
-  "email": "leosantacecilia@gmail.com",
-  "areaServed": "BR",
-  "availableLanguage": ["pt-BR", "en", "es"],
-  "sameAs": ["https://www.instagram.com/psi.leosantacecilia/"],
-  "employee": {
-    "@type": "Person",
-    "name": "Leonardo Santa Cecília",
-    "jobTitle": "Psicólogo clínico",
-    "alumniOf": "Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio)"
-  }
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://psicologoleonardosc.com/#servico",
+      "name": "Leonardo Santa Cecília · Psicólogo",
+      "description": "Psicoterapia online em Terapia Cognitivo-Comportamental (TCC) para ansiedade, esgotamento e burnout. CRP 05/67861.",
+      "url": "https://psicologoleonardosc.com/",
+      "image": "https://psicologoleonardosc.com/leonardo-retrato-880.jpg",
+      "telephone": "+55 21 99111-7223",
+      "email": "leosantacecilia@gmail.com",
+      "areaServed": "BR",
+      "availableLanguage": [
+        "pt-BR",
+        "en",
+        "es"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/psi.leosantacecilia/"
+      ],
+      "founder": {
+        "@id": "https://psicologoleonardosc.com/#leonardo"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://psicologoleonardosc.com/#leonardo",
+      "name": "Leonardo Santa Cecília",
+      "jobTitle": "Psicólogo",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "CRP",
+        "value": "05/67861"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio)"
+      },
+      "knowsLanguage": [
+        "pt-BR",
+        "en",
+        "es"
+      ],
+      "url": "https://psicologoleonardosc.com/",
+      "image": "https://psicologoleonardosc.com/leonardo-retrato-880.jpg",
+      "sameAs": [
+        "https://www.instagram.com/psi.leosantacecilia/"
+      ],
+      "worksFor": {
+        "@id": "https://psicologoleonardosc.com/#servico"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://psicologoleonardosc.com/#site",
+      "url": "https://psicologoleonardosc.com/",
+      "name": "Leonardo Santa Cecília · Psicólogo",
+      "inLanguage": "pt-BR"
+    }
+  ]
 }
 </script>
 
