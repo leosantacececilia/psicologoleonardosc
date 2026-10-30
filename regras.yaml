@@ -1,0 +1,146 @@
+# regras.yaml - Regras tributárias usadas pelos cálculos (pessoa física, renda variável em bolsa)
+# Cada regra traz fonte primária e data de consulta. Nada aqui foi preenchido "de memória":
+# os textos foram lidos nas páginas oficiais em 2026-10-30 (Receita Federal/normas.receita, Câmara dos
+# Deputados/Legin para leis federais, Perguntas e Respostas IRPF 2026 da RFB). O que não pôde ser
+# confirmado em fonte primária está marcado como "A CONFIRMAR".
+#
+# IMPORTANTE: os valores finais de cada DARF devem ser conferidos no Sicalc (Receita Federal).
+# Tudo neste projeto é estimativa.
+
+meta:
+  data_consulta: "2026-10-30"
+  data_base_calculo: "2026-10-30"
+  nota_mp_1303_2025: >-
+    A MP 1.303/2025 (que criaria alíquota única de 17,5% e apuração trimestral a partir de 2026)
+    perdeu a validade (caducou) em out/2025, segundo notícias de imprensa; as Perguntas e Respostas IRPF 2026
+    da RFB (abr/2026) mantêm 15%/20% e isenção mensal de R$ 20 mil. Status: A CONFIRMAR em fonte oficial
+    (não encontramos ato oficial declarando a perda de eficácia; a P&R 2026 é o indício primário usado).
+
+aliquotas:
+  operacoes_comuns:
+    valor: 0.15
+    descricao: "Ganhos líquidos em operações comuns (não day trade) em bolsa: ações, BDR, ETF (mercado à vista)"
+    fonte:
+      - "Lei 11.033/2004, art. 2º, II (texto consolidado Câmara/Legin): https://www2.camara.leg.br/legin/fed/lei/2004/lei-11033-21-dezembro-2004-535177-normaatualizada-pl.html"
+      - "P&R IRPF 2026, pergunta 706: https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/perguntas-e-respostas/dirpf/p-r-irpf-2026-v1-00-2026-04-23.pdf"
+    trecho: "II - 15% (quinze por cento), nas demais hipóteses."
+    status: CONFIRMADA
+  day_trade:
+    valor: 0.20
+    fonte:
+      - "Lei 11.033/2004, art. 2º, I"
+      - "IN RFB 1585/2015, art. 65, § 11, I: https://normas.receita.fazenda.gov.br/sijut2consulta/link.action?idAto=67494"
+    trecho: "I - 20% (vinte por cento), no caso de operação day trade;"
+    status: CONFIRMADA
+  fii:
+    valor: 0.20
+    descricao: "Ganhos na alienação de cotas de FII/Fiagro em bolsa (sem isenção de R$ 20 mil)"
+    fonte:
+      - "Lei 8.668/1993, art. 18 (red. Lei 9.779/1999): https://www2.camara.leg.br/legin/fed/lei/1993/lei-8668-25-junho-1993-350597-normaatualizada-pl.html"
+      - "IN RFB 1585/2015, art. 37, caput e § 1º, I, a"
+    trecho: "sujeitam-se à incidência do imposto sobre a renda à alíquota de 20% (vinte por cento)"
+    status: CONFIRMADA
+    nota: "Fiagro (KNCA11) tratado como FII por analogia (Lei 11.033 art. 3º, III cita FII e Fiagro juntos para rendimentos). A CONFIRMAR para ganho de capital em Fiagro."
+
+bdr:
+  regime: "ganho líquido em bolsa (mesma seção das ações), alíquota 15%, SEM isenção de R$ 20 mil"
+  fonte:
+    - "IN RFB 1585/2015, art. 56, § 1º, I, a: 'na alienação de Brazilian Depositary Receipts (BDR), em bolsa'"
+    - "Lei 11.033/2004, art. 3º, I: isenção restrita a 'operações no mercado à vista de ações' e ouro"
+    - "Solução de Consulta Cosit nº 39/2022 (DOU 05/10/2022): https://normas.receita.fazenda.gov.br/sijut2consulta/link.action?idAto=126441"
+  status: CONFIRMADA   # ver arquivo de fontes; a SC 39/2022 foi lida na página da RFB (texto em scratchpad/fontes)
+
+etf:
+  regime: "ganho líquido em bolsa, 15%, SEM isenção de R$ 20 mil (fundos de índice de ações excluídos expressamente)"
+  fonte:
+    - "IN RFB 1585/2015, art. 59, § 2º, II: 'às negociações de cotas dos fundos de investimento em índice de ações'"
+    - "P&R IRPF 2026, pergunta 707"
+  status: CONFIRMADA
+  nota_hash11: >-
+    HASH11 é fundo de índice (ETF) listado na B3; tratado como ETF de renda variável (15%, sem isenção),
+    e não como criptoativo direto (IN 1888/2019). A CONFIRMAR: a IN 1585 fala em 'fundos de índice de ações';
+    ETFs de outros índices (cripto, ouro) seguem a regra geral de ganhos líquidos em bolsa (art. 56), sem a isenção.
+  nota_auro11_ivvb11: "Mesmo tratamento (ETF de renda variável, 15%, sem isenção)."
+
+isencao_20k:
+  limite_mensal: 20000.00
+  aplica_a: ["acoes"]   # só ações (mercado à vista); ouro tem limite próprio e não é usado aqui
+  nao_aplica_a: ["bdr", "etf", "fii", "day_trade"]
+  base_do_limite: "soma do valor de ALIENAÇÃO de ações no mês (não o lucro)"
+  mes_de_referencia: "data do pregão (fato gerador), conforme P&R IRPF 2026 pergunta 745"
+  fonte:
+    - "Lei 11.033/2004, art. 3º, I"
+    - "IN RFB 1585/2015, art. 59, I e § 2º"
+    - "P&R IRPF 2026, perguntas 707 e 745"
+  trecho: "I - os ganhos líquidos auferidos por pessoa física em operações no mercado à vista de ações nas bolsas de valores ... cujo valor das alienações, realizadas em cada mês, seja igual ou inferior a R$ 20.000,00"
+  status: CONFIRMADA
+
+compensacao_prejuizos:
+  regra_geral: >-
+    Perdas em operações comuns (ações, BDR, ETF - arts. 58 e 60 a 62 da IN 1585) compensam ganhos líquidos
+    de operações comuns no próprio mês ou em meses/anos seguintes, em qualquer modalidade. Day trade só
+    compensa day trade. Não há compensação retroativa (mês anterior).
+  grupos:
+    comuns: ["acoes", "bdr", "etf"]   # um único saldo de prejuízo
+    day_trade: ["day_trade"]
+    fii: ["fii"]                       # só com ganhos em cotas de FII (IN 1585 art. 37 § 2º)
+  perdas_em_meses_isentos: >-
+    Prejuízo com ações em mês cujas vendas ficaram <= R$ 20 mil é compensável com ganhos tributáveis,
+    desde que informado no Demonstrativo de Renda Variável (IN 1585 art. 59 § 1º; P&R 2026 pergunta 729).
+  fonte:
+    - "IN RFB 1585/2015, art. 64 e parágrafo único; art. 37, § 2º; art. 59, § 1º"
+    - "P&R IRPF 2026, perguntas 709, 710, 711, 729"
+  status: CONFIRMADA
+
+custo_de_aquisicao:
+  metodo: "média ponderada dos custos unitários, consolidada entre corretoras"
+  fonte: ["IN RFB 1585/2015, art. 58 caput", "P&R IRPF 2026, perguntas 719 e 720"]
+  corretagem_e_taxas: "somadas ao custo de compra e deduzidas do valor de venda (IN 1585 art. 56 § 3º; P&R 708). NÃO disponíveis no extrato de movimentação da B3 => custo calculado sem taxas (conservador: imposto um pouco maior)."
+  bonificacao: "custo = parcela do lucro/reserva capitalizado atribuída ao acionista (Lei 9.249/95 art. 10 § 1º; IN 1585 art. 58 § 1º). Valor por ação não consta no extrato => tratado com custo ZERO (conservador). A CONFIRMAR com o valor informado por cada companhia."
+  desdobramento: "custo zero para as ações adicionais; custo total inalterado (IN 1585 art. 58 § 7º, II; P&R 722)"
+  grupamento: "quantidade reduzida, custo total inalterado (mesma lógica do § 7º, II); fração em leilão tratada como venda"
+  incorporacao_fusao_cisao: "custo das ações/cotas originais atribuído às novas na proporção fixada pela assembleia (IN 1585 art. 58 § 6º). Proporções não constam no extrato => custo integral transferido às novas cotas (FIIs) e custo zero para a fração de cisão X2ZZ34 (A CONFIRMAR)."
+  restituicao_de_capital: "reduz o custo de aquisição (IN 1585 art. 58 § 8º)"
+  subscricao: "custo = preço de exercício + custo dos direitos comprados (média ponderada, art. 58)"
+  status: CONFIRMADA (exceto valores de bonificação/cisão, A CONFIRMAR)
+
+darf:
+  codigo: "6015"
+  vencimento: "último dia útil do mês subsequente ao da apuração (mês da liquidação financeira, P&R 745)"
+  minimo: 10.00
+  regra_minimo: "imposto < R$ 10,00 no mês é adicionado ao dos meses seguintes até atingir R$ 10,00, pagando-se no vencimento deste último (Lei 9.430/96 art. 68 § 1º)"
+  fonte:
+    - "IN RFB 1585/2015, art. 56, § 5º"
+    - "P&R IRPF 2026, perguntas 730 e 745"
+    - "Lei 9.430/1996, art. 68 e § 1º: https://www2.camara.leg.br/legin/fed/lei/1996/lei-9430-27-dezembro-1996-367738-normaatualizada-pl.html"
+  status: CONFIRMADA
+  irrf_dedo_duro: "0,005% sobre vendas, dispensado se <= R$ 1,00 no mês; dedutível do imposto (Lei 11.033 art. 2º § 1º; IN 1585 art. 63 §§ 4º e 8º). Valores retidos não constam no extrato => NÃO deduzidos (conservador; diferença máxima de ~R$ 2,50 no total)."
+
+multa_de_mora:
+  taxa_dia: 0.0033
+  limite: 0.20
+  contagem: "do primeiro dia subsequente ao vencimento até o dia do pagamento (dias corridos)"
+  base: "valor do tributo (principal)"
+  fonte:
+    - "Lei 9.430/1996, art. 61, caput, § 1º e § 2º"
+    - "RFB - Como calcular multa de mora: https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/pagamento-em-atraso/como-calcular-multa-de-mora-acrescimos-legais"
+  trecho: "multa de mora, calculada à taxa de trinta e três centésimos por cento, por dia de atraso ... limitado a vinte por cento"
+  status: CONFIRMADA
+
+juros_de_mora:
+  regra: "Selic acumulada do mês seguinte ao vencimento até o mês anterior ao pagamento, mais 1% no mês do pagamento; sem juros se pago no próprio mês do vencimento; juros incidem só sobre o principal (não sobre a multa)"
+  fonte:
+    - "Lei 9.430/1996, art. 61, § 3º"
+    - "RFB - Como calcular juros de mora: https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/pagamentos-e-parcelamentos/pagamento-em-atraso/como-calcular-juros-de-mora-acrescimos-legais"
+  serie_selic: "dados/selic_mensal.csv (BCB SGS 4390, consultado em 2026-10-30)"
+  status: CONFIRMADA
+
+day_trade:
+  definicao: "operações iniciadas e encerradas no mesmo dia, mesmo ativo, mesma instituição (IN 1585 art. 65 § 1º, I; P&R 705)"
+  deteccao: "compra e venda do mesmo ativo no mesmo dia de pregão e mesma corretora"
+  status: CONFIRMADA
+
+datas:
+  ciclo_liquidacao: "D+2 dias úteis (B3, ações/BDR/ETF/FII). O extrato de movimentação da B3 mostra a data de LIQUIDAÇÃO; a data do pregão é estimada como 2 dias úteis antes."
+  uso: "mês da liquidação => apuração/DARF (P&R 745); data do pregão => limite de isenção e detecção de day trade"
+  status: "A CONFIRMAR (ciclo D+2 inferido do próprio extrato: compras liquidadas 2 dias úteis após a data-com informada pelo Investidor10; B3 não consultada)"

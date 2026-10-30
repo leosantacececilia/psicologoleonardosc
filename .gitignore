@@ -1,0 +1,7 @@
+# Dados pessoais e saídas da apuração de IR (não publicar: o repositório é público)
+dados/
+relatorio.md
+carteira.xlsx
+__pycache__/
+.pytest_cache/
+*.pyc
