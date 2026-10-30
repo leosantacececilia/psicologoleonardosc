@@ -424,3 +424,27 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .cookie-banner .btn-navy:hover { background: rgba(255, 248, 233, .08); }
 @media (max-width: 600px) { .cookie-banner { bottom: calc(88px + env(safe-area-inset-bottom, 0px)); } }
 .foot-nav .foot-legal { margin-left: auto; opacity: .85; }
+
+/* ---------- Menu no celular (abaixo de 980 px; sem JavaScript) ---------- */
+.menu-m { display: none; position: static; }
+.menu-m summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid var(--band-line); border-radius: 999px; color: #E3E9EB; font-weight: 600; font-size: .92rem; }
+.menu-m summary::-webkit-details-marker { display: none; }
+.menu-m summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.menu-m-ico, .menu-m-ico::before, .menu-m-ico::after { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; }
+.menu-m-ico { position: relative; }
+.menu-m-ico::before, .menu-m-ico::after { content: ""; position: absolute; left: 0; }
+.menu-m-ico::before { top: -5px; } .menu-m-ico::after { top: 5px; }
+.menu-m[open] summary { color: var(--yellow); border-color: var(--yellow); }
+.menu-m-panel { position: absolute; left: 16px; right: 16px; top: calc(100% + 8px); display: flex; flex-direction: column; padding: 8px; background: var(--band); border: 1px solid var(--band-line); border-radius: 14px; box-shadow: 0 12px 32px rgba(0, 0, 0, .28); }
+.menu-m-panel a { color: #E3E9EB; text-decoration: none; font-weight: 500; padding: 12px 14px; border-radius: 10px; }
+.menu-m-panel a:hover, .menu-m-panel a:focus-visible { background: rgba(255, 248, 233, .08); color: var(--yellow); }
+.menu-m-panel a[aria-current="page"] { color: var(--yellow); }
+@media (max-width: 980px) { .menu-m { display: block; margin-left: auto; } }
+@media (max-width: 420px) { .menu-m summary { padding: 0 10px; } .menu-m summary .menu-m-ico { margin-right: 0; } }
+@media (max-width: 560px) {
+  .menu-m summary { width: 40px; padding: 0; justify-content: center; font-size: 0; gap: 0; }
+}
+@media (max-width: 360px) {
+  .brand svg { display: none; }
+  .site-header .btn-sm { padding: 0 11px; }
+}

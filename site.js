@@ -30,3 +30,11 @@
     })(links[i]);
   }
 })();
+
+/* 3) Menu no celular: fecha ao escolher uma página ou ao tocar fora. */
+(function () {
+  var menu = document.querySelector('.menu-m');
+  if (!menu) return;
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) menu.removeAttribute('open'); });
+  document.addEventListener('click', function (e) { if (menu.open && !menu.contains(e.target)) menu.removeAttribute('open'); });
+})();
