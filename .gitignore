@@ -5,3 +5,5 @@ carteira.xlsx
 __pycache__/
 .pytest_cache/
 *.pyc
+continuidade_ir.zip
+CONTINUIDADE.md
