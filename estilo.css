@@ -7,14 +7,14 @@
   --surface-2: #FBEDCF;
   --ink: #0E3244;             /* Azul Marinho */
   --ink-2: #3E5664;
-  --ink-3: #667983;
+  --ink-3: #566A77;          /* contraste 5.3:1 sobre o off white (AA para texto pequeno) */
   --line: #EBDBBC;
   --orange: #E6864E;          /* Laranja Pastel */
   --yellow: #E6B54E;          /* Amarelo Pastel */
   --accent: #E6864E;
   --accent-hover: #EE9A68;
   --on-accent: #0E3244;
-  --em: #C45F2A;              /* laranja com contraste para títulos no claro */
+  --em: #B25320;              /* laranja com contraste 4.8:1 no claro (anos da formação e numeração) */
   --label: #A9501F;           /* laranja com contraste para textos pequenos */
   --band: #0E3244;
   --band-ink: #FFF8E9;
@@ -210,6 +210,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 860px) {
   .about .wrap { grid-template-columns: 1fr; }
   .about-photo { position: static; max-width: 340px; }
+  .about { overflow-x: clip; } /* a moldura amarela (::before) avançava 18px além da borda em telas de 360px, criando rolagem lateral */
 }
 
 /* ---------- Abordagem ---------- */
@@ -412,3 +413,38 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .foot-nav { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 22px; padding-top: 20px; border-top: 1px solid var(--band-line); }
 .foot-nav a { color: #E3E9EB; text-decoration: none; font-weight: 500; font-size: .95rem; }
 .foot-nav a:hover { color: var(--yellow); }
+
+/* ---------- Aviso de cookies (consent.js) ---------- */
+.cookie-banner { position: fixed; z-index: 70; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); margin-inline: auto; max-width: 40rem; display: grid; gap: 14px; padding: 20px 22px; border-radius: 22px; background: var(--band); color: var(--band-ink); box-shadow: var(--shadow); border: 1px solid var(--band-line); }
+.cookie-banner p { font-size: .95rem; color: var(--band-ink-2); }
+.cookie-banner a { color: #FFF8E9; text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.cookie-banner .btn { border: 0; cursor: pointer; }
+.cookie-banner .btn-navy { background: transparent; color: #FFF8E9; border: 2px solid var(--band-ink-2); }
+.cookie-banner .btn-navy:hover { background: rgba(255, 248, 233, .08); }
+@media (max-width: 600px) { .cookie-banner { bottom: calc(88px + env(safe-area-inset-bottom, 0px)); } }
+.foot-nav .foot-legal { margin-left: auto; opacity: .85; }
+
+/* ---------- Menu no celular (abaixo de 980 px; sem JavaScript) ---------- */
+.menu-m { display: none; position: static; }
+.menu-m summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid var(--band-line); border-radius: 999px; color: #E3E9EB; font-weight: 600; font-size: .92rem; }
+.menu-m summary::-webkit-details-marker { display: none; }
+.menu-m summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.menu-m-ico, .menu-m-ico::before, .menu-m-ico::after { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; }
+.menu-m-ico { position: relative; }
+.menu-m-ico::before, .menu-m-ico::after { content: ""; position: absolute; left: 0; }
+.menu-m-ico::before { top: -5px; } .menu-m-ico::after { top: 5px; }
+.menu-m[open] summary { color: var(--yellow); border-color: var(--yellow); }
+.menu-m-panel { position: absolute; left: 16px; right: 16px; top: calc(100% + 8px); display: flex; flex-direction: column; padding: 8px; background: var(--band); border: 1px solid var(--band-line); border-radius: 14px; box-shadow: 0 12px 32px rgba(0, 0, 0, .28); }
+.menu-m-panel a { color: #E3E9EB; text-decoration: none; font-weight: 500; padding: 12px 14px; border-radius: 10px; }
+.menu-m-panel a:hover, .menu-m-panel a:focus-visible { background: rgba(255, 248, 233, .08); color: var(--yellow); }
+.menu-m-panel a[aria-current="page"] { color: var(--yellow); }
+@media (max-width: 980px) { .menu-m { display: block; margin-left: auto; } }
+@media (max-width: 420px) { .menu-m summary { padding: 0 10px; } .menu-m summary .menu-m-ico { margin-right: 0; } }
+@media (max-width: 560px) {
+  .menu-m summary { width: 40px; padding: 0; justify-content: center; font-size: 0; gap: 0; }
+}
+@media (max-width: 360px) {
+  .brand svg { display: none; }
+  .site-header .btn-sm { padding: 0 11px; }
+}
