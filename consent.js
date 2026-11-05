@@ -10,7 +10,7 @@
      Se preferir o modo avançado (carregar sempre, com pings sem cookies quando recusado),
      mude CARREGAR_SEM_CONSENTIMENTO para true. Recomendação: manter false (LGPD). */
 (function () {
-  var GOOGLE_TAG_ID = '';
+  var GOOGLE_TAG_ID = 'G-DWHYNK1SP9';
   var CARREGAR_SEM_CONSENTIMENTO = false;
   var CHAVE = 'lsc-consent';
   var raiz = (document.body && document.body.getAttribute('data-root')) || '';

@@ -17,9 +17,9 @@ No GitHub, abra o `index.html`, clique no **lápis (Edit)**, altere o texto e cl
 - **Páginas:** `index.html` (início), `tcc-online/index.html`, `burnout-trabalho/index.html`, `ansiedade-trabalho/index.html`, `tdah-adulto/index.html`, `como-funciona/index.html` e `privacidade/index.html`. Os textos de cada página estão no arquivo dela, na ordem em que aparecem.
 - **Cores e fontes:** ficam em `estilo.css`, usado por todas as páginas.
 - **WhatsApp:** procure por `wa.me`. Cada página tem uma mensagem automática própria ("Vi a página sobre burnout…", "Li a página Como funciona…"), para você saber de onde veio cada contato. A da página inicial é "Vim pelo seu site…".
-- **Medição (opcional):** `site.js` registra o clique nos botões de WhatsApp (evento `whatsapp_click`, com página e posição do botão, sem dados pessoais). Para ligar o Google Analytics ou o Tag Manager, preencha `GOOGLE_TAG_ID` em `consent.js`; o aviso de cookies só aparece depois disso, e a tag só carrega depois do "Aceitar".
+- **Medição:** Google Analytics 4 ligado (ID `G-DWHYNK1SP9`, em `GOOGLE_TAG_ID` no `consent.js`). `site.js` registra o clique nos botões de WhatsApp (evento `whatsapp_click`, com página e posição do botão, sem dados pessoais). O aviso de cookies aparece na primeira visita, e a tag só carrega depois do "Aceitar".
 - **Privacidade:** a política está em `privacidade/index.html`. Se incluir uma ferramenta nova no site, atualize a política e a data no fim dela.
-- **Search Console:** o `sitemap.xml` lista as páginas públicas. Se escolher a verificação por meta tag, cole a tag no `index.html`, na linha indicada logo abaixo do `canonical`.
+- **Search Console:** propriedade "Prefixo do URL" (`https://psicologoleonardosc.com/`), verificada pela meta tag `google-site-verification` no `index.html`, logo abaixo do `canonical`. Não apague essa linha, ou a verificação cai. O `sitemap.xml` lista as páginas públicas.
 - **Fotos:** envie um arquivo novo com o mesmo nome (`leonardo-retrato-880.jpg`, `leonardo-sobre.jpg` etc.) em **Add file → Upload files**.
 
 ## Cuidados éticos (CFP) já aplicados
